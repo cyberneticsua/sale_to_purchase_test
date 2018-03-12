@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Додавання фільтрів категорій -->
+        <record id="sale_order_order_line_view" model="ir.ui.view">
+            <field name="name">sale.order.order.line.tab</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                 <!-- <xpath expr="//notebook/page[1]" position="after">
+                    <page name="Products" string="Товари">
+                        <field name="order_line" widget="one2many_checkbox">
+                            <tree editable="bottom">
+                                <field name="product_id" />
+                                <field name="name" />
+                                <field name="product_uom_qty"/>
+                                <field name="qty_delivered"/>
+                                <field name="qty_invoiced"/>
+                                <field name="price_unit"/>
+                                <field name="price_subtotal"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath> -->
+                <xpath expr="//field[@name='order_line']//tree//field[@name='name']" position="after">
+                    <field name="isPurchased" string="Замовлено" /> 
+                </xpath>
+                <xpath expr="//field[@name='order_line']//form//field[@name='name']" position="after">
+                    <field name="isPurchased" string="Замовлено" />
+                </xpath>
+                <xpath expr="//field[@name='order_line']//tree//field[@name='sequence']" position="replace">
+                </xpath>
+                <!-- <xpath expr="//group[@name='sale_pay']/field[@name='invoice_status']" position="attributes">
+                    <attribute name="invisible" eval="False"/>
+                </xpath> -->
+            </field>
+        </record>
+        <!-- <record model="ir.ui.view" id="sale_order_line_tree">
+            <field name="name">sale_isPurchased.order.line.tree</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_order_line_tree" /> 
+            <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="isPurchased" /></field>
+            </field>
+        </record> -->
+    </data>
+</odoo>
+
+
+
+        

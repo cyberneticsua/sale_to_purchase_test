@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="sale_order_form_view">
+		    <field name="name">sale.order.view</field>
+		    <field name="model">sale.order</field>
+		    <field name="inherit_id" ref="sale.view_order_form"/>
+		    <field name="arch" type="xml">
+			      <xpath expr="//button[@name='action_cancel']" position="after">
+			             <button name="action_purchase_orders" states="sale" type="object" class="btn-primary" string="Create Purchase Order"/>
+			      </xpath>
+                  
+			</field>
+		</record>
+        
+        <!-- <record id="view_order_form_widget" model="ir.ui.view">
+            <field name="name">sale.order.widget.view</field> 
+            <field name="model">sale.order</field> 
+            <field name="inherit_id" ref="sale.view_order_form" /> 
+            <field name="arch" type="xml">
+                 <field name='order_line' position="replace">
+                <field name="order_line" widget="one2many_checkbox"/>
+                </field>
+            </field>
+        </record> -->
+  
+
+
+
+		<record id="wizard_form_purchase_order" model="ir.ui.view">
+        <field name="name">purchase.order.form.wizard</field>
+        <field name="model">purchase.order.wizard</field>
+        <field name="arch" type="xml">
+               <form string="Purchase Order">
+                    <group>
+                    	<group>
+                    		<field name="partner_id"/>
+                    		<field name="date_order"/>
+                    	</group>
+                    	<group>
+                    		<field name="company_id"/>
+                    		<field name="picking_type_id"/>
+                    	</group>
+                    </group>
+                    <field name="order_line">
+                                <tree string="Purchase Order Lines" editable="bottom">
+                                    <field name="product_id" context="{'partner_id': parent.partner_id}" required="True"/>
+                                    <field name="name" required="True"/>
+                                    <field name="product_qty" required="True"/>
+                                    <field name="product_uom" required="True" invisible="True"/>
+                                    <field name="price_unit" required="True"/>
+                                    <field name="price_subtotal" widget="monetary"/>
+                                </tree>
+                     </field>
+                    <footer>
+                        <button string="Generate Purchase Order " type="object" name="generate_purchase_order" class="btn-primary"/>or
+                        <button name="cancel" string="Cancel" special="cancel" class="oe_link"/>
+                   
+                    </footer>
+                </form>
+        </field>
+        </record>
+	</data>
+</odoo>
